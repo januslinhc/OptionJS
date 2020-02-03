@@ -5,6 +5,7 @@ interface IOptional<T> {
     nonEmpty(): boolean;
     getOrElse(value: T): T;
     get(): T | null;
+    equal(value: IOptional<T>): boolean;
 }
 
 class Optional<T> implements IOptional<T> {
@@ -32,6 +33,13 @@ class Optional<T> implements IOptional<T> {
     }
     get(): T | null {
         return this.value;
+    }
+
+    equal(value: IOptional<T>): boolean {
+        if (this.value == value.value) {
+            return true;
+        }
+        return false;
     }
 
     static some<K>(value: K): Optional<K> {
